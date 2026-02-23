@@ -1,0 +1,27 @@
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Compile
+        run: javac BMI.java
+      - name: Run tests
+        run: java org.junit.runner.JUnitCore com.example.MyTests        # stage the new directory and file
+        git add .github/workflows/ci.yml
+        
+        # commit with a message
+        git commit -m "Add CI workflow for Java project"
+        
+        # push to the remote (assumes 'origin' and branch 'main' exist)
+        git push origin main
